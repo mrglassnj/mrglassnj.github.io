@@ -20,15 +20,13 @@ assets/img/             ← logo + favicon
 
 ---
 
-## Part 1 — Publish the site on GitHub Pages (one time)
+## Part 1 — Hosting (already set up)
 
-1. Create a new GitHub repository (e.g. `mrglass-site`).
-2. Upload **all** the files in this folder to the repo (keep the folder structure).
-3. In the repo: **Settings → Pages**.
-4. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-5. Branch: `main`, folder: `/ (root)` → **Save**.
-6. Wait ~1 minute. Your site goes live at
-   `https://<your-username>.github.io/<repo-name>/`
+This site is live on GitHub Pages at **<https://mrglassnj.github.io/>**, served from the
+`main` branch (root) of the `mrglassnj/mrglassnj.github.io` repository.
+
+To publish updates: commit your changes and push to `main` — the site rebuilds
+automatically in about a minute.
 
 The site works immediately — the gallery shows sample tiles until you connect Drive.
 
@@ -38,7 +36,8 @@ The site works immediately — the gallery shows sample tiles until you connect 
 
 ### Step A — Create the photo folders in Google Drive
 
-1. In Google Drive, create one parent folder, e.g. **"MR Glass Photos"**.
+1. Go to **[Google Drive](https://drive.google.com/)** and create one parent folder,
+   e.g. **"MR Glass Photos"**.
 2. Inside it, create one folder per category (names can be anything):
    - Shower Enclosures
    - Custom Mirrors
@@ -94,6 +93,63 @@ window.MRGLASS_CONFIG = {
 
 Commit/upload the change. The gallery now loads your real photos and filters them by
 category.
+
+---
+
+## Part 3 — Connect a custom domain from GoDaddy
+
+Point a domain you bought on GoDaddy (e.g. `mrglassnj.com`) at this GitHub Pages site.
+You'll set DNS records at GoDaddy, then tell GitHub the domain.
+
+### Step 1 — Add DNS records at GoDaddy
+
+1. Sign in at **[GoDaddy](https://godaddy.com/)** → **My Products** → next to your domain
+   click **DNS** (or **Manage DNS**).
+2. Under **Records**, add the following. Delete any existing default `A` record for
+   `@` (the "Parked" one) first.
+
+   **For the root/apex domain** (`mrglassnj.com`) — add **four A records**, all with
+   Name `@`:
+
+   | Type | Name | Value           | TTL     |
+   |------|------|-----------------|---------|
+   | A    | @    | 185.199.108.153 | 1 Hour  |
+   | A    | @    | 185.199.109.153 | 1 Hour  |
+   | A    | @    | 185.199.110.153 | 1 Hour  |
+   | A    | @    | 185.199.111.153 | 1 Hour  |
+
+   *(Optional but recommended — also add these four AAAA records for IPv6, Name `@`:*
+   `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`,
+   `2606:50c0:8003::153`.)*
+
+   **For the `www` subdomain** — add **one CNAME record**:
+
+   | Type  | Name | Value                    | TTL    |
+   |-------|------|--------------------------|--------|
+   | CNAME | www  | `mrglassnj.github.io.`   | 1 Hour |
+
+3. **Save**. DNS changes can take anywhere from a few minutes to a few hours to
+   propagate.
+
+### Step 2 — Tell GitHub about the domain
+
+1. In the repo on GitHub: **Settings → Pages**.
+2. Under **Custom domain**, type your domain (e.g. `mrglassnj.com`) → **Save**.
+   - This creates a `CNAME` file in the repo. If you pull the repo afterward, run
+     `git pull` so your local copy stays in sync.
+3. Wait for the **DNS check** to pass (GitHub shows a green check).
+4. Tick **Enforce HTTPS** once it becomes available (can take up to ~24h for the
+   certificate to be issued).
+
+### Step 3 — Update the API key restriction
+
+If you set up the Google Drive API key with a website restriction (Part 2, Step C.7),
+add your new domain to the allowed referrers, e.g. `https://mrglassnj.com/*` and
+`https://www.mrglassnj.com/*`. Otherwise the gallery images may stop loading on the new
+domain.
+
+> Use either the root domain (`mrglassnj.com`) or `www` as your primary in GitHub —
+> GitHub automatically redirects the other one to it.
 
 ---
 
