@@ -94,9 +94,21 @@ h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); }
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(255,255,255,.86);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
   border-bottom: 1px solid var(--line);
+}
+
+/* sticky contact bar above the navbar */
+.topbar { background: var(--bg-dark); color: rgba(255,255,255,.8); font-size: 0.85rem; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px; }
+.topbar-area { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; }
+.topbar-area svg { color: var(--lime); }
+.topbar-links { display: flex; align-items: center; gap: 22px; }
+.topbar-links a { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.82); font-weight: 500; transition: color .15s; }
+.topbar-links a:hover { color: var(--lime); }
+@media (max-width: 680px) {
+  .topbar-area, .topbar-links .tb-email { display: none; }
+  .topbar-inner { justify-content: center; gap: 24px; }
 }
 .header-inner { display: flex; align-items: center; gap: 24px; height: 72px; }
 .brand { display: flex; align-items: center; gap: 9px; }
