@@ -8,7 +8,6 @@
   "use strict";
 
   var CONFIG = window.MRGLASS_CONFIG || { apiKey: "", categories: [] };
-  var ALL = "All Work";
 
   var grid = document.getElementById("gallery-grid");
   var filters = document.getElementById("gallery-filters");
@@ -16,7 +15,7 @@
 
   // photos = [{ src, full, tag }]
   var photos = [];
-  var activeFilter = ALL;
+  var activeFilter = "";
 
   /* ---------- Google Drive image URLs ---------- */
   // Drive serves resizable images via the thumbnail endpoint.
@@ -53,7 +52,8 @@
 
   /* ---------- Build filter buttons ---------- */
   function renderFilters(categories) {
-    var names = [ALL].concat(categories.map(function (c) { return c.name; }));
+    var names = categories.map(function (c) { return c.name; });
+    if (!activeFilter && names.length) activeFilter = names[0];
     filters.innerHTML = "";
     names.forEach(function (name) {
       var btn = document.createElement("button");
@@ -73,9 +73,7 @@
 
   /* ---------- Render the photo grid ---------- */
   function renderGrid() {
-    var list = activeFilter === ALL
-      ? photos
-      : photos.filter(function (p) { return p.tag === activeFilter; });
+    var list = photos.filter(function (p) { return p.tag === activeFilter; });
 
     grid.innerHTML = "";
 
@@ -101,7 +99,7 @@
     '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h14V5H5zm2 2h4l-4 6V7z"/></svg>';
 
   function renderPlaceholders() {
-    var label = activeFilter === ALL ? "Sample" : activeFilter;
+    var label = activeFilter || "Sample";
     var count = 6;
     for (var i = 0; i < count; i++) {
       var item = document.createElement("div");
