@@ -18,11 +18,11 @@ window.MRGLASS_CONFIG = {
                        (the long code in the folder's share URL).
         Leave folderId as "" and a category will show sample tiles. */
   categories: [
-    { name: "Shower Enclosures", folderId: "https://drive.google.com/drive/folders/1VUu1-awi0LouqE8cisalEf7qDQBF9Tbk?usp=drive_link" },
-    { name: "Custom Mirrors",    folderId: "https://drive.google.com/drive/folders/1j1w9MaUwToR6X43yQ9gouXaCQahMDD5b?usp=drive_link" },
-    { name: "Glass Railings",    folderId: "https://drive.google.com/drive/folders/1yUefuUEx2PQi5A9PqAEw3ThwW7y439_-?usp=drive_link" },
-    { name: "Storefronts",       folderId: "https://drive.google.com/drive/folders/1Y_DL8RLUnZya3KKZ-WLQPeyrqnHweEsr?usp=drive_link" },
-    { name: "Office Partitions", folderId: "https://drive.google.com/drive/folders/1coUFzbk-Ot6Z84YdGxnYADG52KArLPWS?usp=drive_link" }
+    { name: "Shower Enclosures", folderId: "1VUu1-awi0LouqE8cisalEf7qDQBF9Tbk" },
+    { name: "Custom Mirrors",    folderId: "1j1w9MaUwToR6X43yQ9gouXaCQahMDD5b" },
+    { name: "Glass Railings",    folderId: "1yUefuUEx2PQi5A9PqAEw3ThwW7y439_-" },
+    { name: "Storefronts",       folderId: "1Y_DL8RLUnZya3KKZ-WLQPeyrqnHweEsr" },
+    { name: "Office Partitions", folderId: "1coUFzbk-Ot6Z84YdGxnYADG52KArLPWS" }
   ]
 
 };
